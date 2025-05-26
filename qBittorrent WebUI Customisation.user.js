@@ -53,7 +53,7 @@
     function addCopyOptions(copyMenu) {
         const options = [
             { id: 'copyPathAuto', label: 'Copy path string (OS-dependent)', format: 'Auto' },
-            { id: 'copyPathRaw', label: 'Copy path string as is', format: 'Default' },
+            { id: 'copyPathRaw', label: 'Copy path string as is', format: 'Raw' },
             { id: 'copyPathTrueNAS', label: 'Copy TrueNAS version of path', format: 'TrueNAS' },
             { id: 'copyPathWindows', label: 'Copy Windows version of path', format: 'Windows' }
         ];

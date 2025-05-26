@@ -6,6 +6,8 @@
 // @author       WhonderWy
 // @match        https://diskprices.com/*
 // @grant        none
+// @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/HDD%20Filter%20and%20Sort%20with%20Highlight%20and%20Scroll.user.js
+// @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/HDD%20Filter%20and%20Sort%20with%20Highlight%20and%20Scroll.meta.js
 // ==/UserScript==
 
 (function() {

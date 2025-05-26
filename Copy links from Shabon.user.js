@@ -9,6 +9,8 @@
 // @grant        GM_setClipboard
 // @grant        GM_registerMenuCommand
 // @grant        GM_notification
+// @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Copy%20links%20from%20Shabon.user.js
+// @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Copy%20links%20from%20Shabon.meta.js
 // ==/UserScript==
 
 (function() {

@@ -6,4 +6,6 @@
 // @author       Your Name
 // @match        https://east-digital.myshopify.com/*
 // @grant        none
+// @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Divide%20Prices%20on%20Load%20with%20Alert.user.js
+// @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Divide%20Prices%20on%20Load%20with%20Alert.meta.js
 // ==/UserScript==

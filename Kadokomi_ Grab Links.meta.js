@@ -9,4 +9,6 @@
 // @grant        GM_setClipboard
 // @grant        GM_registerMenuCommand
 // @grant        GM_notification
+// @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Kadokomi_%20Grab%20Links.user.js
+// @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Kadokomi_%20Grab%20Links.meta.js
 // ==/UserScript==

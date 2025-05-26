@@ -6,6 +6,8 @@
 // @author       WhonderWy
 // @match        https://comic-walker.com/detail/*
 // @grant        none
+// @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Kadokomi_%20Notify%20if%20Unread%20Episode.user.js
+// @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/Kadokomi_%20Notify%20if%20Unread%20Episode.meta.js
 // ==/UserScript==
 
 (function () {

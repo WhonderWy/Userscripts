@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         qBittorrent WebUI Enhancement
 // @namespace    Whonderful
-// @version      2025-05-26
+// @version      2025-05-27
 // @description  Adds "Copy Save Path" to the context menu for each torrent row
 // @author       WhonderWy
 // @match        http*://192.168.68.65:8080/*

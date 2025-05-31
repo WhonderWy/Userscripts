@@ -18,6 +18,7 @@
 
     const exclusions = [
         "filecrypt.cc",
+        "javascript",
     ];
     const menu_command_id_1 = GM_registerMenuCommand("Copy to Shabon Links to Clipboard", (event) => {
         const linkElements = document.querySelectorAll("table a");

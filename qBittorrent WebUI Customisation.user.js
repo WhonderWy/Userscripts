@@ -1,20 +1,34 @@
 // ==UserScript==
 // @name         qBittorrent WebUI Enhancement
 // @namespace    Whonderful
-// @version      2025-05-27
+// @version      2026-10-04
 // @description  Adds "Copy Save Path" to the context menu for each torrent row
 // @author       WhonderWy
 // @match        http*://192.168.68.65:8080/*
 // @match        http*://qb*.downloader.local/*
 // @match        http*://downloader.local/qb*
+// @grant        GM_xmlhttpRequest
 // @grant        GM_setClipboard
 // @run-at       document-idle
+// @connect      localhost
 // @downloadURL  https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/qBittorrent%20WebUI%20Customisation.user.js
 // @updateURL    https://github.com/WhonderWy/Userscripts/raw/refs/heads/main/qBittorrent%20WebUI%20Customisation.meta.js
 // ==/UserScript==
 
 (function() {
     'use strict';
+
+    function openLocally(paths) {
+        console.log(`Sending ${paths} to local device`);
+        fetch("http://localhost:48888/dolphin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paths: paths })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error("Error:", err));
+    }
 
     function detectOS() {
         const userAgent = navigator.userAgent || navigator.platform;
@@ -35,6 +49,8 @@
                 return `/mnt/tank${path}`;
             case 'Windows':
                 return `\\\\TRUENAS${path.replace(/\//g, '\\')}`;
+            case 'Linux':
+                return `$HOME${path}`;
             default:
                 return path;
         }
@@ -47,6 +63,7 @@
             const newPath = transformPath(savePath, format);
             GM_setClipboard(newPath);
             alert(`Copied path: ${newPath}`);
+            openLocally([newPath]);
         }
     }
 
@@ -72,38 +89,45 @@
     }
 
     function enhanceContextMenu() {
-        const copyMenuItem = document.querySelector('.contextMenu #copyComment')?.parentElement?.parentElement;
-        if (copyMenuItem) {
-            addCopyOptions(copyMenuItem);
+        const copyMenu = document.querySelector(
+            '.contextMenu #copyComment'
+        )?.parentElement?.parentElement;
+
+        if (!copyMenu || copyMenu.dataset.whonderEnhanced) {
+            return;
         }
+
+        copyMenu.dataset.whonderEnhanced = '1';
+        addCopyOptions(copyMenu);
     }
 
     function makeSavePathClickable() {
         const savePathElement = document.getElementById('save_path');
-        if (savePathElement) {
-            savePathElement.style.cursor = 'pointer';
-            savePathElement.onclick = () => {copyPath('Auto');};
-        }
-    }
 
-    window.addEventListener("load", function() {
-        const img = document.getElementById("connectionStatus");
-
-        if (!img) {
-            console.warn("Image element not found!");
+        if (!savePathElement || savePathElement.dataset.whonderEnhanced) {
             return;
         }
 
-        function runLogic() {
-            enhanceContextMenu();
-            makeSavePathClickable();
-        }
+        savePathElement.dataset.whonderEnhanced = '1';
+        savePathElement.style.cursor = 'pointer';
+        savePathElement.onclick = () => copyPath('Auto');
+    }
 
-        if (img.complete) {
-            runLogic();
-        } else {
-            img.addEventListener("load", runLogic);
-        }
+    function runLogic() {
+        enhanceContextMenu();
+        makeSavePathClickable();
+    }
+
+    window.addEventListener('load', () => {
+        runLogic();
+
+        const observer = new MutationObserver(runLogic);
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        setInterval(runLogic, 2000);
     });
 })();
-
